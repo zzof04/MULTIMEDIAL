@@ -1,68 +1,97 @@
 <!DOCTYPE html>
-<!-- Indica al navegador que este documento usa HTML5 -->
-
-<html>
-<!-- Inicio del documento HTML -->
-
+<html lang="es">
 <head>
-<!-- Sección donde van metadatos, título y estilos -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zofportal</title>
+    <style>
+        /* 1. RESET Y BASE */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<meta charset="UTF-8">
-<!-- Define la codificación de caracteres para que se vean bien tildes y símbolos -->
+        body {
+            font-family: 'Arial', sans-serif;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden; /* Evita que aparezcan barras de scroll */
+            color: white;
+        }
 
-<title>Muldimedial</title>
-<!-- Título de la página que aparece en la pestaña del navegador -->
+        /* 2. VIDEO DE FONDO */
+        #video-fondo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Hace que el video cubra toda la pantalla sin deformarse */
+            z-index: -1; /* Lo manda al fondo */
+            filter: brightness(0.6); /* Oscurece un poco el video para que el texto resalte */
+        }
 
-<style>
-/* Aquí comienza la sección de estilos CSS que define la apariencia visual */
+        /* 3. CONTENEDOR PRINCIPAL */
+        .contenido-central {
+            text-align: center;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
 
-body{
-/* "body" se refiere a todo el contenido visible de la página */
+        h1 {
+            font-size: 4rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
 
-  background-color: yellow;
-  /* Define que el fondo de toda la página sea blanco */
+        /* 4. BOTONES / LINKS */
+        .enlaces {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
 
-  color: lightblue;
-  /* Define que el color del texto sea negro */
+        .boton {
+            text-decoration: none;
+            color: white;
+            border: 2px solid white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px); /* Efecto de vidrio esmerilado */
+        }
 
-  margin: 0;
-  /* Elimina los márgenes que los navegadores agregan por defecto */
-
-  height: 100vh;
-  /* Hace que el alto del cuerpo sea igual al 100% de la altura de la pantalla */
-
-  display: flex;
-  /* Activa el sistema Flexbox para organizar y centrar elementos */
-
-  justify-content: center;
-  /* Centra el contenido horizontalmente */
-
-  align-items: center;
-  /* Centra el contenido verticalmente */
-
-  font-family: Arial, sans-serif;
-  /* Define la tipografía del texto */
-
-  font-size: 60px;
-  /* Define el tamaño grande del texto */
-
-}
-/* Fin de las reglas de estilo del body */
-
-</style>
-<!-- Fin de la sección de estilos -->
-
+        .boton:hover {
+            background: white;
+            color: black;
+            transform: scale(1.05);
+        }
+    </style>
 </head>
-<!-- Fin de la sección head -->
-
 <body>
-<!-- Inicio del contenido visible de la página -->
 
-AUDIO VISUAL
-<!-- Texto que aparece en el centro de la pantalla -->
+    <video autoplay muted loop playsinline id="video-fondo">
+        <source src="videos/Ensayo de un cosmos.mp4" type="video/mp4">
+        Tu navegador no soporta videos.
+    </video>
+
+    <div class="contenido-central">
+        <h1>Zofportal</h1>
+        
+        <div class="enlaces">
+            <a href="Indice de obras.html" class="boton">Obras</a>
+            <a href="contacto.html" class="boton">Contacto</a>
+        </div>
+    </div>
 
 </body>
-<!-- Fin del contenido visible -->
-
 </html>
-<!-- Fin del documento HTML -->
