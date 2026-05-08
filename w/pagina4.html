@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Zofportal - Cianotipia</title>
+
+    <style>
+        /* 1. ESTILO GENERAL */
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-image: url("img/hdhjsjdj.png");
+            background-size: cover;
+            background-attachment: fixed;
+            background-color: #000000;
+            color: white;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Centra todo el contenido horizontalmente */
+        }
+
+        /* 2. CONTENEDOR PRINCIPAL (Controla el ancho de la página) */
+        .contenedor {
+            max-width: 900px; /* Evita que los bloques sean gigantes */
+            width: 90%;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        /* 3. ENCABEZADO */
+        .encabezado {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .encabezado h1 {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 5px;
+            color: #ffffff;
+            text-shadow: 0px 0px 15px rgba(255,255,255,0.3);
+        }
+
+        .encabezado p {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #cccccc;
+        }
+
+        /* 4. BOTONES / LINKS */
+        .enlaces {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .boton {
+            text-decoration: none;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.5);
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .boton:hover {
+            background: white;
+            color: black;
+            transform: translateY(-2px);
+        }
+
+        /* 5. BLOQUES DE OBRA */
+        .bloque {
+            background-color: rgba(39, 35, 28, 0.8); /* Un poco de transparencia */
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .bloque:hover {
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        /* Imagen/GIF dentro del bloque */
+        .bloque img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            display: block;
+            margin-bottom: 20px;
+        }
+
+        .bloque h2 {
+            font-size: 1.5rem;
+            margin: 0 0 10px 0;
+            color: #f0f0f0;
+            border-left: 3px solid #fff;
+            padding-left: 15px;
+        }
+
+        .bloque p {
+            line-height: 1.6;
+            color: #dddddd;
+            margin: 5px 0;
+            font-size: 1rem;
+        }
+
+        .especificaciones {
+            font-family: monospace;
+            font-size: 0.85rem !important;
+            color: #888 !important;
+            margin-top: 10px !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="contenedor">
+
+        <header class="encabezado">
+            <h1>Cianotipia</h1>
+            <p>Serie de reflejos de copas y cristales.</p>
+        </header>
+
+        <nav class="enlaces">
+            <a href="index.html" class="boton">Página principal</a>
+            <a href="obra.html" class="boton">Nebulosas</a>
+            <a href="pagina3.html" class="boton">Exoplanetas</a>
+        </nav>
+
+        <article class="bloque">
+            <img src="img/Foto_2026-05-07_225104.jpeg" alt="cianotipia">
+            <h2>"Sin título" (2025)</h2>
+            <p>Cianotipia sobre papel de acuarela.</p>
+            <p>24x16cm</p>
+        </article>
+
+         <article class="bloque">
+            <img src="img/Foto_2026-05-07_225242.jpeg" alt="cianotipia">
+            <h2>"Sin título" (2025)</h2>
+            <p>Cianotipia sobre papel de acuarela.</p>
+            <p>24x16cm</p>
+        </article>
+
+         <article class="bloque">
+            <img src="img/Foto_2026-05-07_224924.jpeg" alt="cianotipia">
+            <h2>"Sin título" (2025)</h2>
+            <p>Cianotipia sobre papel de acuarela.</p>
+            <p>24x16cm</p>
+        </article>
+
+         <article class="bloque">
+            <img src="img/Foto_2026-05-07_225510.jpeg" alt="cianotipia">
+            <h2>"Sin título" (2025)</h2>
+            <p>Cianotipia sobre tela.</p>
+            <p>21x23cm</p>
+        </article>
+
+         <article class="bloque">
+            <img src="img/Foto_2026-05-07_225634.jpeg" alt="cianotipia">
+            <h2>"Sin título" (2025)</h2>
+            <p>Cianotipia sobre tela.</p>
+            <p>21x21cm</p>
+        </article>
+      
+
+        </div>
+
+</body>
+</html>
