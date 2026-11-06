@@ -1,11 +1,23 @@
-# MULTIMEDIAL
+# <span style="color: pink;">MULTIMEDIAL</span>
 
 #### Exploración creativa de arte, tecnología y medios digitales interactivos.
 
 
-### Cultura web y arte digital.
+### Unidad I. Hipervínculo
 
-Ejercicio 1, semana 1:
+1. Mi primera página
+2. Sitio Web 
+
+### Unidad II. Programación visual creativa
+
+1. Intro TouchDesigner
+2. Ejercicios
+
+## Unidad I
+
+### Página y vínculos
+
+#### 1. Mi primera página: 
 
 ```js
 <!DOCTYPE html>
@@ -77,3 +89,15 @@ MULTIMEDIAL
 </html>
 <!-- Fin del documento HTML -->
 ```
+
+#### 2. Resultados página Web
+
+ https://zzof04.github.io/MULTIMEDIAL/w/index.html 
+
+## Unidad II
+
+### Introducción a TouchDesigner.
+```js
+Comenzamos conociendo herramientas y nodos básicos como el TOP, CHOP, además de integrar sliders y botones como herramientas de interacción. Personalmente experimenté con los filtros de imágenes y nodos para la creación de una figura reactiva al sonido.
+```
+<img src="https://github.com/zzof04/MULTIMEDIAL/blob/main/img/Proyecto1.png?raw=true" width="auto" height="auto"/>S
