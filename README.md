@@ -97,7 +97,7 @@ MULTIMEDIAL
 ## Unidad II
 
 ### Introducción a TouchDesigner.
-```
+
 Comenzamos conociendo herramientas y nodos básicos como el TOP, CHOP, además de integrar sliders y botones como herramientas de interacción. Personalmente experimenté con los filtros de imágenes y nodos para la creación de una figura reactiva al sonido.
-```
+
 <img src="https://github.com/zzof04/MULTIMEDIAL/blob/main/img/Proyecto1.png?raw=true" width="auto" height="auto"/>S
