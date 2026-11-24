@@ -1,7 +1,32 @@
+<img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/Adobe%20Express%20-%20Grabaci%C3%B3n%20arbol.gif" width="1920" height="auto"/>
+
 # <span style="color: pink;">MULTIMEDIAL</span>
 
 #### Exploración creativa de arte, tecnología y medios digitales interactivos.
 
+<style>
+  body {
+    background-color: #000000;
+    color: #eaeaea
+  }
+  div.highlighter-rouge,
+  div.highlighter-rouge .highlight,
+  div.highlighter-rouge pre { 
+    background-color: #000;
+    color: #f2f2f2;
+  }
+
+  div.highlighter-rouge pre {
+    padding: 1em; 
+    border-radius: 8px;
+    overflow-x: auto;
+  }
+
+  div.highlighter-rouge code {
+    background: transparent;
+    color: inherit;
+  }
+  </style>
 
 ### Unidad I. Hipervínculo
 
@@ -103,7 +128,7 @@ MULTIMEDIAL
 https://drive.google.com/drive/folders/1H-1MCiFf7Ah3RitZw5CoLaFOJG1MuUVW?usp=drive_link 
 
 ```text 
-Comenzamos conociendo herramientas y nodos básicos como el TOP, CHOP, además de integrar sliders y botones como herramientas de interacción. Personalmente experimenté con imágenes que ya poseía, agregándole filtros de imágenes del programa y nodos para la creación de una figura reactiva al sonido. 
+Comenzamos conociendo herramientas y nodos básicos como el TOP, CHOP, además de integrar sliders y botones como herramientas de interacción. Personalmente experimenté con imágenes que ya poseía, agregándole filtros de imágenes del programa y nodos para la creación de una figura reactiva al sonido. Quise seguir desarrollando mi temática enfocada en la unión entre arte y ciencia, específicamente la astronomía. 
 ```
 <img src="https://github.com/zzof04/MULTIMEDIAL/blob/main/img/Proyecto1.png?raw=true" width="auto" height="auto"/> Ejercicio inicial
 
@@ -117,7 +142,8 @@ Proyector, computador con conexión a arduino + sensor
 
 <img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/IMG_0924.jpg" width="auto" height="auto"/> Conexión sensor ultrasónico
 
-<gif src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/gif/Adobe%20Express%20-%20IMG_1005.gif"width="auto" height="auto"/> C
+<img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/Adobe%20Express%20-%20IMG_1005.gif" width="auto" height="auto"/> 
+
 
 ### Ejercicios.
 
@@ -130,23 +156,163 @@ Proyector, computador con conexión a arduino + sensor
 #### Link Drive
 https://drive.google.com/drive/folders/1e38di-CiK1ChWk6DJTIdB44sNnNaRe1O?usp=drive_link 
 
-#### 2. Comfy desktop / prompt
+#### 2. Desarrollo proyecto final
+El desarrollo del proyecto anterior me permitió entender la dimension tecnológica de mi proyecto de tesis.
+La integración del sensor ultrasónico al TouchDesiner significó un desafío tecnico que debia comprender: ¿Cómo funciona un sensor?, ¿cómo lo conecto al programa?, ¿cual será su disposición en el montaje? Sin embargo, si bien usaba imágenes que ludían al cosmos estas no tenian un significado más allá de su función electronica y visual. Me pregunté qué era lo que realmente quería contar.
 
-Le pedí a la ia (Claude) la creación de las imágenes adjuntando los bocetos de
-referencia:
+##
+
+#### Espacio recorrible.
+
+Una de las cosas que llamó mi atención del ejercicio del L'system era su visualidad en el espacio "vacio", además que el ejercicio contaba con un nodo "camera" que permitía cambiar la visualidad del objeto en el render. 
+
+Esta cualidad hizo que me preguntara por el recorrido tridimensional del objeto y pensar en este mismo como respuesta a la interacción del espectador en la obra. ¿Que pasa si le entrego el control de recorrido al espectador dentro de un espacio digital? Aún sin llegar a la visualidad del proyecto, decidí aprender cómo podía materializar mi idea: 
+
+#### 1: como primer paso, debía conectar un joystick conectado a arduino a la cámara que controlaba la visualidad del render, con el fín de controlar a tiempo real el recorrido tridimensional.
+
+Con la ayuda de Claude, se creó este código: 
 
 ```text
-A partir de las imágenes de referencia crea una imagen realista de cada una
-considerando: los bocetos se tratan de una instalación artística donde se proyecta, a
-oscuras, un proyecto visual en una sala blanca rectangular. Las imágenes que se
-proyectan corresponden a espacios físicos tridimensionales llevados a un sistema
-de puntos que resalta en contraste con el espacio oscuro, como la referencia. Estos
-se encuentran en un espacio digital mediado por el programa Touchdesigner. En la
-imagen 1, se muestra esta proyección cubriendo todo el espacio de la pared en vista
-frontal. Al frente, se sitúa un plinto donde descansa un joystick conectado a Arduino
-a la altura óptima donde el espectador sea capaz de manipularlo. En la segunda
-imagen se muestra la proyección hacia una esquina de la sala, enfocando el
-proyector y el monitor donde corre el programa Touchdesigner.
+import math
+
+def onFrameStart(frame):
+cam = op('/project1/container1/cam_main1')
+joy = op('/project1/sys_input/joy_raw_chop')
+
+if me.fetch('inicializado', False) is False:
+me.store('heading', 0.0)
+me.store('pitch', 0.0)
+me.store('smoothX', 0.0)
+me.store('smoothY', 0.0)
+me.store('centerOffsetX', 0.0)
+me.store('centerOffsetY', 0.0)
+me.store('calibrando', True)
+me.store('calibFrames', 0)
+me.store('calibSumX', 0.0)
+me.store('calibSumY', 0.0)
+me.store('posX', 0.0)
+me.store('posY', 2.0)
+me.store('posZ', -6.0)
+me.store('inicializado', True)
+return
+
+rawX = joy['x'][0]
+rawY = joy['y'][0]
+btnA = joy['a'][0] > 0.5
+btnB = joy['b'][0] > 0.5
+btnC = joy['c'][0] > 0.5
+btnD = joy['d'][0] > 0.5
+
+mapX = (rawX - 0) / (1023 - 0) * (1 - (-1)) + (-1)
+mapY = (rawY - 0) / (1023 - 0) * (1 - (-1)) + (-1)
+
+calibMax = 40
+if me.fetch('calibrando'):
+me.store('calibSumX', me.fetch('calibSumX') + mapX)
+me.store('calibSumY', me.fetch('calibSumY') + mapY)
+cf = me.fetch('calibFrames') + 1
+me.store('calibFrames', cf)
+if cf >= calibMax:
+me.store('centerOffsetX', me.fetch('calibSumX') / cf)
+me.store('centerOffsetY', me.fetch('calibSumY') / cf)
+me.store('calibrando', False)
+joyX, joyY = 0, 0
+else:
+joyX = aplicarRespuesta(mapX - me.fetch('centerOffsetX'))
+joyY = aplicarRespuesta(mapY - me.fetch('centerOffsetY'))
+
+lookSmoothing = 0.10
+smoothX = me.fetch('smoothX') + (joyX - me.fetch('smoothX')) * lookSmoothing
+smoothY = me.fetch('smoothY') + (joyY - me.fetch('smoothY')) * lookSmoothing
+me.store('smoothX', smoothX)
+me.store('smoothY', smoothY)
+
+turnSpeed = 1.2
+heading = me.fetch('heading') + smoothX * turnSpeed
+pitch = me.fetch('pitch') - smoothY * turnSpeed
+pitch = max(-75, min(75, pitch))
+me.store('heading', heading)
+me.store('pitch', pitch)
+
+moveSpeed = 0.03
+rad = math.radians(heading)
+rightX = math.cos(rad)
+rightZ = -math.sin(rad)
+
+targetVertical = (1 if btnA else 0) - (1 if btnC else 0)
+targetStrafe = (1 if btnB else 0) - (1 if btnD else 0)
+
+posX = me.fetch('posX') + rightX * targetStrafe * moveSpeed
+posZ = me.fetch('posZ') + rightZ * targetStrafe * moveSpeed
+posY = me.fetch('posY') + targetVertical * moveSpeed
+
+me.store('posX', posX)
+me.store('posY', posY)
+me.store('posZ', posZ)
+
+cam.par.rx = pitch
+cam.par.ry = heading
+cam.par.tx = posX
+cam.par.ty = posY
+cam.par.tz = posZ
+
+
+return
+
+
+def aplicarRespuesta(v):
+deadzone = 0.07
+curve = 1.6
+if abs(v) < deadzone:
+return 0
+signo = -1 if v < 0 else 1
+mag = (abs(v) - deadzone) / (1 - deadzone)
+mag = max(0, min(1, mag))
+mag = mag ** curve
+return signo * mag
+```
+<img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/IMG_1424.jpg" width="500" height="auto"/> Joystick Shield
+
+<img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/Adobe%20Express%20-%20Grabaci%C3%B3n%20arbol.gif" width="1920" height="auto"/> 
+
+#### 2. Con el control técnicamente ya armado, mi próximo paso fue integrar más "objetos" dentro el espacio digital:
+
+<img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/3A14A8B0-E3CD-465B-934A-E1FCE48B09FF.jpg" width="400" height="auto"/> 
+
+##
+#### Estrellas y el pasado.
+
+El desarrollo poético de la obra me hizo replantear mi mirada sobre el cosmos. 
+
+El universo y mis ganas por representarlo me llevaron a mi punto de partida, mi hogar de origen gracias a la pregunta de mi tio hace más de ocho años: ¿sabías que cuando miramos las estrellas, realmente vemos la luz de su pasado? a raíz de esto, me pregunté por aquella distancia y el tiempo que separa al observador. Tanto la luz de una estrella como mi casa natal son un pasado que aún llega hasta mi. 
+
+Mi casa natal se manifiesta de forma intangible, a través del recuerdo, los sueños, el recuerdo. Metodológicamente, necesitaba encontrar una manera de volver a recorrer aquellos recuerdos, es por esto, que di con una aplicación llamada Scaniverse, una plataforma inmersiva que permite, gracias a la tecnología LiDAR, escanear espacios y objetos físicos y llevarlos a modelos 3D detallados y de alta resolución. Su carácter gratuito y su facilidad de manejo me permitieron compartirla con alguien en mi ciudad natal. Para recolectar estos espacios, mi amiga de la infancia se dio la tarea de realizar un recorrido y habitar los mismos espacios que yo frecuentaba, escaneando pasillos, esculturas, espacios, etc, cada uno cargado de significado emocional y biográfico. 
+
+Una de las características visuales que posee esta herramienta, es que los escáner no siempre quedan perfectos, hay partes que se fragmentan, datos que se pierden generando una imagen incompleta. Lejos de significar un error, lo tomo como una cualidad visual clave.
+
+<img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/IMG_2625.PNG" width="400" height="auto"/> 
+
+Escaner "casa" (scaniverse)
+
+<img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/f44b1017-97cf-443d-bbcf-1919172351de.jpg" width="400" height="auto"/> 
+
+Escaner "fuente" (scaniverse)
+
+Estos escáner son exportados en el formato PLY, un formato de archivo 3D que almacena objetos gráficos en una colección de vértices, caras e incluso propiedades de color que luego son leídos en el programa TouchDesigner y traducidos a un sistema de puntos. En este paso, los lugares físicos se vuelven un dato programable que luego pasan a imagen. 
+
+<img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/IMG_2795.PNG" width="700" height="auto"/> 
+
+<img src="https://github.com/zzof04/MULTIMEDIAL/blob/main/img/Grabaci%C3%B3n%20espacio.gif?raw=true" width="700" height="auto"/> 
+
+
+#### 3. Comfy desktop / prompt
+
+Aprendimos el uso del programa Comfy Desktop para la creación de imágenes con inteligencia artificial. Con el fin de crear visuales que inspiren nuestros proyectos en TouchDesigner, además de visualizar opciones de montaje, bocetos, etc. 
+Para mi proyecto, decidí generar opciones de montaje. Le pedí a la ia (Claude) la creación de las imágenes adjuntando los bocetos de referencia hechos a mano:
+
+```text
+A partir de las imágenes de referencia crea una imagen realista de cada una considerando: los bocetos se tratan de una instalación artística donde se proyecta, a oscuras, un proyecto visual en una sala blanca rectangular. Las imágenes que se proyectan corresponden a espacios físicos tridimensionales llevados a un sistema de puntos que resalta en contraste con el espacio oscuro, como la referencia. Estos se encuentran en un espacio digital mediado por el programa Touchdesigner.
+En la imagen 1, se muestra esta proyección cubriendo todo el espacio de la pared en vista frontal. Al frente, se sitúa un plinto donde descansa un joystick conectado a Arduino a la altura óptima donde el espectador sea capaz de manipularlo. En la segunda imagen se muestra la proyección hacia una esquina de la sala, enfocando el proyector y el monitor donde corre el programa Touchdesigner.
 ```
 
 Me arrojó 2 prompts que luego pasé por Gémini:
@@ -164,6 +330,7 @@ projection. Floor reflects faint dots of light. Symmetrical one-point perspectiv
 cinematic, long exposure, ultra-detailed, 35mm, f/2.8, contemporary art installation
 documentation.
 ```
+<img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/IMG_2442.PNG" width="auto" height="auto"/> imagen generada en Comfy desktop
 
 #### imagen 2: 
 ```text
@@ -176,3 +343,6 @@ running TouchDesigner, showing a node network with connected rectangular
 operators, its screen glow lighting the table. Dark ceiling with a visible grid. Moody,
 low-light, cinematic, high contrast, art installation documentation photo, 24mm lens.
 ```
+
+<img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/IMG_2443.PNG" width="auto" height="auto"/> imagen generada en Comfy desktop
+
