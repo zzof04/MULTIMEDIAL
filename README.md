@@ -103,8 +103,6 @@
 
 ### Unidad I. Hipervínculo
 
-### Unidad I. Hipervínculo
-
 1. [Mi primera página](#1-mi-primera-p%C3%A1gina)
 2. [Sitio Web](#2-resultados-p%C3%A1gina-web)
 ### Unidad II. Programación visual creativa
