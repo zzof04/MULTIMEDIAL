@@ -5,31 +5,93 @@
     display: none !important;
   }
 
+  /* Fondo negro en todos los contenedores del tema */
+  html, body, .wrapper, .container, .container-lg, .page-content, main, article,
+  section, header, footer, .inner, .markdown-body, #main_content_wrap, #header_wrap {
+    background-color: #000000 !important;
+    color: #eaeaea !important;
+  }
+
   body {
-    background-color: #000000;
-    color: #eaeaea;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  /* Columna de lectura centrada */
+  .wrapper, .container, .inner, main, article, section {
+    max-width: 900px !important;
+    width: auto !important;
+    float: none !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
+  /* Todo el texto visible sobre negro */
+  h1, h2, h3, h4, h5, h6, p, li, strong, em {
+    color: #eaeaea !important;
+  }
+
+  h2 {
+    margin-top: 2.4em;
+    padding-bottom: .3em;
+    border-bottom: 1px solid rgba(255,255,255,0.18);
+  }
+
+  h3, h4 {
+    margin-top: 1.8em;
   }
 
   a {
-    color: #ff85b3;
+    color: #ff85b3 !important;
+    word-break: break-all;
   }
 
+  /* Imágenes: todas del mismo tamaño y con marco */
+  img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    background: #000;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 10px;
+    margin: 1.5em 0 .6em 0;
+  }
+
+  /* Cuadros de texto / código con transparencia */
   div.highlighter-rouge,
   div.highlighter-rouge .highlight,
-  div.highlighter-rouge pre { 
-    background-color: #111111;
-    color: #f2f2f2;
+  div.highlighter-rouge pre {
+    background-color: rgba(255,255,255,0.07) !important;
+    color: #f2f2f2 !important;
+  }
+
+  div.highlighter-rouge {
+    border: 1px solid rgba(255,255,255,0.18);
+    border-left: 4px solid #ff85b3;
+    border-radius: 10px;
+    margin: 1.5em 0;
+    backdrop-filter: blur(6px);
   }
 
   div.highlighter-rouge pre {
-    padding: 1em; 
+    padding: 1em;
     border-radius: 8px;
     overflow-x: auto;
+    white-space: pre-wrap;      /* las líneas largas se ven completas */
+    word-break: break-word;
+    font-size: 14px;
+    line-height: 1.55;
   }
 
-  div.highlighter-rouge code {
-    background: transparent;
-    color: inherit;
+  div.highlighter-rouge code,
+  div.highlighter-rouge pre code span {
+    background: transparent !important;
+    color: #f2f2f2 !important;
   }
 </style>
 
@@ -47,12 +109,12 @@
 ### Unidad II. Programación visual creativa
 
 1. Intro TouchDesigner
-2. Ejercicios
-   2.1. link primeros ejercicios
-   2.2. L'system
-3. Proyecto Final
-   3.1. Espacio recorrible
-   3.2 Estrellas y el pasado
+2. Ejercicios  
+   2.1. link primeros ejercicios  
+   2.2. L'system  
+3. Proyecto Final  
+   3.1. Espacio recorrible  
+   3.2 Estrellas y el pasado  
 4. Comfy desktop / prompt
    
 ## Unidad I
@@ -193,100 +255,100 @@ Con la ayuda de Claude, se creó este código:
 import math
 
 def onFrameStart(frame):
-cam = op('/project1/container1/cam_main1')
-joy = op('/project1/sys_input/joy_raw_chop')
+    cam = op('/project1/container1/cam_main1')
+    joy = op('/project1/sys_input/joy_raw_chop')
 
-if me.fetch('inicializado', False) is False:
-me.store('heading', 0.0)
-me.store('pitch', 0.0)
-me.store('smoothX', 0.0)
-me.store('smoothY', 0.0)
-me.store('centerOffsetX', 0.0)
-me.store('centerOffsetY', 0.0)
-me.store('calibrando', True)
-me.store('calibFrames', 0)
-me.store('calibSumX', 0.0)
-me.store('calibSumY', 0.0)
-me.store('posX', 0.0)
-me.store('posY', 2.0)
-me.store('posZ', -6.0)
-me.store('inicializado', True)
-return
+    if me.fetch('inicializado', False) is False:
+        me.store('heading', 0.0)
+        me.store('pitch', 0.0)
+        me.store('smoothX', 0.0)
+        me.store('smoothY', 0.0)
+        me.store('centerOffsetX', 0.0)
+        me.store('centerOffsetY', 0.0)
+        me.store('calibrando', True)
+        me.store('calibFrames', 0)
+        me.store('calibSumX', 0.0)
+        me.store('calibSumY', 0.0)
+        me.store('posX', 0.0)
+        me.store('posY', 2.0)
+        me.store('posZ', -6.0)
+        me.store('inicializado', True)
+        return
 
-rawX = joy['x'][0]
-rawY = joy['y'][0]
-btnA = joy['a'][0] > 0.5
-btnB = joy['b'][0] > 0.5
-btnC = joy['c'][0] > 0.5
-btnD = joy['d'][0] > 0.5
+    rawX = joy['x'][0]
+    rawY = joy['y'][0]
+    btnA = joy['a'][0] > 0.5
+    btnB = joy['b'][0] > 0.5
+    btnC = joy['c'][0] > 0.5
+    btnD = joy['d'][0] > 0.5
 
-mapX = (rawX - 0) / (1023 - 0) * (1 - (-1)) + (-1)
-mapY = (rawY - 0) / (1023 - 0) * (1 - (-1)) + (-1)
+    mapX = (rawX - 0) / (1023 - 0) * (1 - (-1)) + (-1)
+    mapY = (rawY - 0) / (1023 - 0) * (1 - (-1)) + (-1)
 
-calibMax = 40
-if me.fetch('calibrando'):
-me.store('calibSumX', me.fetch('calibSumX') + mapX)
-me.store('calibSumY', me.fetch('calibSumY') + mapY)
-cf = me.fetch('calibFrames') + 1
-me.store('calibFrames', cf)
-if cf >= calibMax:
-me.store('centerOffsetX', me.fetch('calibSumX') / cf)
-me.store('centerOffsetY', me.fetch('calibSumY') / cf)
-me.store('calibrando', False)
-joyX, joyY = 0, 0
-else:
-joyX = aplicarRespuesta(mapX - me.fetch('centerOffsetX'))
-joyY = aplicarRespuesta(mapY - me.fetch('centerOffsetY'))
+    calibMax = 40
+    if me.fetch('calibrando'):
+        me.store('calibSumX', me.fetch('calibSumX') + mapX)
+        me.store('calibSumY', me.fetch('calibSumY') + mapY)
+        cf = me.fetch('calibFrames') + 1
+        me.store('calibFrames', cf)
+        if cf >= calibMax:
+            me.store('centerOffsetX', me.fetch('calibSumX') / cf)
+            me.store('centerOffsetY', me.fetch('calibSumY') / cf)
+            me.store('calibrando', False)
+        joyX, joyY = 0, 0
+    else:
+        joyX = aplicarRespuesta(mapX - me.fetch('centerOffsetX'))
+        joyY = aplicarRespuesta(mapY - me.fetch('centerOffsetY'))
 
-lookSmoothing = 0.10
-smoothX = me.fetch('smoothX') + (joyX - me.fetch('smoothX')) * lookSmoothing
-smoothY = me.fetch('smoothY') + (joyY - me.fetch('smoothY')) * lookSmoothing
-me.store('smoothX', smoothX)
-me.store('smoothY', smoothY)
+    lookSmoothing = 0.10
+    smoothX = me.fetch('smoothX') + (joyX - me.fetch('smoothX')) * lookSmoothing
+    smoothY = me.fetch('smoothY') + (joyY - me.fetch('smoothY')) * lookSmoothing
+    me.store('smoothX', smoothX)
+    me.store('smoothY', smoothY)
 
-turnSpeed = 1.2
-heading = me.fetch('heading') + smoothX * turnSpeed
-pitch = me.fetch('pitch') - smoothY * turnSpeed
-pitch = max(-75, min(75, pitch))
-me.store('heading', heading)
-me.store('pitch', pitch)
+    turnSpeed = 1.2
+    heading = me.fetch('heading') + smoothX * turnSpeed
+    pitch = me.fetch('pitch') - smoothY * turnSpeed
+    pitch = max(-75, min(75, pitch))
+    me.store('heading', heading)
+    me.store('pitch', pitch)
 
-moveSpeed = 0.03
-rad = math.radians(heading)
-rightX = math.cos(rad)
-rightZ = -math.sin(rad)
+    moveSpeed = 0.03
+    rad = math.radians(heading)
+    rightX = math.cos(rad)
+    rightZ = -math.sin(rad)
 
-targetVertical = (1 if btnA else 0) - (1 if btnC else 0)
-targetStrafe = (1 if btnB else 0) - (1 if btnD else 0)
+    targetVertical = (1 if btnA else 0) - (1 if btnC else 0)
+    targetStrafe = (1 if btnB else 0) - (1 if btnD else 0)
 
-posX = me.fetch('posX') + rightX * targetStrafe * moveSpeed
-posZ = me.fetch('posZ') + rightZ * targetStrafe * moveSpeed
-posY = me.fetch('posY') + targetVertical * moveSpeed
+    posX = me.fetch('posX') + rightX * targetStrafe * moveSpeed
+    posZ = me.fetch('posZ') + rightZ * targetStrafe * moveSpeed
+    posY = me.fetch('posY') + targetVertical * moveSpeed
 
-me.store('posX', posX)
-me.store('posY', posY)
-me.store('posZ', posZ)
+    me.store('posX', posX)
+    me.store('posY', posY)
+    me.store('posZ', posZ)
 
-cam.par.rx = pitch
-cam.par.ry = heading
-cam.par.tx = posX
-cam.par.ty = posY
-cam.par.tz = posZ
+    cam.par.rx = pitch
+    cam.par.ry = heading
+    cam.par.tx = posX
+    cam.par.ty = posY
+    cam.par.tz = posZ
 
 
-return
+    return
 
 
 def aplicarRespuesta(v):
-deadzone = 0.07
-curve = 1.6
-if abs(v) < deadzone:
-return 0
-signo = -1 if v < 0 else 1
-mag = (abs(v) - deadzone) / (1 - deadzone)
-mag = max(0, min(1, mag))
-mag = mag ** curve
-return signo * mag
+    deadzone = 0.07
+    curve = 1.6
+    if abs(v) < deadzone:
+        return 0
+    signo = -1 if v < 0 else 1
+    mag = (abs(v) - deadzone) / (1 - deadzone)
+    mag = max(0, min(1, mag))
+    mag = mag ** curve
+    return signo * mag
 ```
 <img src="https://raw.githubusercontent.com/zzof04/MULTIMEDIAL/refs/heads/main/img/IMG_1424.jpg" width="500" height="auto"/> 
 
