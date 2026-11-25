@@ -115,7 +115,7 @@
    2.2. [L'system](#1-lsystem) 
 3. [Proyecto Final](#2-desarrollo-proyecto-final ) 
    3.1. [Espacio recorrible](#espacio-recorrible )
-   3.2 [Estrellas y el pasado](#estrellas-y-el-pasado)  
+   3.2. [Estrellas y el pasado](#estrellas-y-el-pasado)  
 4. [Comfy desktop / prompt](#3-comfy-desktop--prompt)
    
 ## Unidad I
