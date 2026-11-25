@@ -103,37 +103,21 @@
 
 ### Unidad I. Hipervínculo
 
-<a id="mi-primera-pagina"></a>
-#### 1. Mi primera página
+### Unidad I. Hipervínculo
 
-<a id="sitio-web"></a>
-2. Sitio Web 
+1. [Mi primera página](#mi-primera-pagina)
+2. [Sitio Web](#sitio-web)
 
 ### Unidad II. Programación visual creativa
 
-<a id="intro-touchdesigner"></a>
-1. Intro TouchDesigner
-   
-   <a id="ejercicios"></a>
-2. Ejercicios
- 
-   <a id="link-primeros-ejercicios"></a> 
-   2.1. link primeros ejercicios
-   
-   <a id="l'system"></a> 
-   2.2. L'system
-   
-   <a id="proyecto-final"></a>
-3. Proyecto Final
-   
-   <a id="espacio-recorrible"></a> 
-   3.1. Espacio recorrible
-   
-   <a id="estrellas-y-el-pasado"></a>
-   3.2 Estrellas y el pasado
-   
-   <a id="comfy-desktop-/-prompt"></a>
-4. Comfy desktop / prompt
+1. [Intro TouchDesigner](#intro-touchdesigner)
+2. [Ejercicios](#ejercicios)  
+   2.1. [link primeros ejercicios](#link-primeros-ejercicios)  
+   2.2. [L'system](#lsystem)  
+3. [Proyecto Final](#proyecto-final)  
+   3.1. [Espacio recorrible](#espacio-recorrible)  
+   3.2 [Estrellas y el pasado](#estrellas-y-el-pasado)  
+4. [Comfy desktop / prompt](#comfy-desktop)
    
 ## Unidad I
 
