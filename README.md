@@ -105,26 +105,35 @@
 
 <a id="mi-primera-pagina"></a>
 #### 1. Mi primera página
-<a id="sitio web"></a>
+
+<a id="sitio-web"></a>
 2. Sitio Web 
 
 ### Unidad II. Programación visual creativa
-<a id="intro touchdesigner"></a>
+
+<a id="intro-touchdesigner"></a>
 1. Intro TouchDesigner
+   
    <a id="ejercicios"></a>
 2. Ejercicios
-   <a id="link primeros ejercicios"></a> 
+ 
+   <a id="link-primeros-ejercicios"></a> 
    2.1. link primeros ejercicios
+   
    <a id="l'system"></a> 
    2.2. L'system
-   <a id="proyecto final"></a>
+   
+   <a id="proyecto-final"></a>
 3. Proyecto Final
-   <a id="espacio recorrible"></a> 
+   
+   <a id="espacio-recorrible"></a> 
    3.1. Espacio recorrible
-   <a id="estrellas y el pasado"></a>
+   
+   <a id="estrellas-y-el-pasado"></a>
    3.2 Estrellas y el pasado
-   <a id="comfy desktop / prompt"></a>
-5. Comfy desktop / prompt
+   
+   <a id="comfy-desktop-/-prompt"></a>
+4. Comfy desktop / prompt
    
 ## Unidad I
 
